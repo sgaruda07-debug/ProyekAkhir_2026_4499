@@ -1,122 +1,97 @@
-/*
- * Proyek Akhir Semester Ganjil — Paket 1
- * XI RPL 2 | Pemrograman Web
- *
- * KERJAKAN HANYA:
- *   JS-01: Melengkapi perulangan for.
- *   JS-02: Mengambil elemen Array berdasarkan indeks.
- *
- * Bagian penghubung antarmuka disiapkan guru dan tidak dinilai
- * pada Paket 1. Jangan mengubah bagian tersebut.
- */
-
-// Data awal disediakan guru. Jangan diubah.
-const daftarKegiatan = ["Piket Kelas", "Rapat OSIS", "Kerja Bakti"];
-
-function tampilkanKegiatan(daftar) {
-  const elemenDaftar = document.getElementById("daftarKegiatan");
-
-  if (elemenDaftar === null) {
-    return;
-  }
-
-  // Disediakan guru: hapus isi daftar sebelum menampilkannya kembali.
-  elemenDaftar.innerHTML = "";
-
-  // TODO JS-01:
-  // Perbaiki batas perulangan for berikut agar dimulai dari indeks pertama
-  // dan memproses seluruh elemen berdasarkan panjang Array (length).
-  for (let i = 0; i < 0; i++) {
-    // TODO JS-02:
-    // Ganti string kosong dengan elemen Array 'daftar' pada indeks i.
-    const namaKegiatan = "";
-
-    // Disediakan guru: pembentukan dan penampilan elemen HTML.
-    const item = document.createElement("li");
-    item.textContent = namaKegiatan;
-    elemenDaftar.appendChild(item);
-  }
+/* CSS-01 */
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f2f4f8;
+  margin: 0;
+  padding: 20px;
 }
 
-// ================================================================
-// KODE PENGHUBUNG ANTARMUKA — DISEDIAKAN GURU, JANGAN DIUBAH
-// Bagian ini bukan materi yang diuji pada Paket 1.
-// Tombol tambah/cari/hapus baru akan berfungsi setelah guru memberi
-// petunjuk dan bagian fungsi pada pertemuan berikutnya.
-// ================================================================
-
-function perbaruiTampilan() {
-  tampilkanKegiatan(daftarKegiatan);
-
-  const elemenTotal = document.getElementById("totalKegiatan");
-  if (elemenTotal !== null) {
-    if (typeof hitungJumlahKegiatan === "function") {
-      elemenTotal.textContent = hitungJumlahKegiatan(daftarKegiatan);
-    } else {
-      elemenTotal.textContent = daftarKegiatan.length;
-    }
-  }
+/* CSS-02 */
+.container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
 }
 
-function tampilkanStatus(pesan, berhasil) {
-  const elemenStatus = document.getElementById("pesanStatus");
-  if (elemenStatus === null) {
-    return;
-  }
-
-  elemenStatus.textContent = pesan;
-  elemenStatus.classList.remove("berhasil", "gagal");
-  elemenStatus.classList.add(berhasil ? "berhasil" : "gagal");
+.kepala-halaman {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2563eb;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const input = document.getElementById("inputKegiatan");
-  const btnTambah = document.getElementById("btnTambah");
-  const btnCari = document.getElementById("btnCari");
-  const btnHapus = document.getElementById("btnHapus");
+.panel {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
 
-  if (input !== null && btnTambah !== null) {
-    btnTambah.addEventListener("click", function () {
-      if (typeof tambahKegiatan !== "function") return;
+/* CSS-03 */
+.form-baris {
+  margin-bottom: 15px;
+}
 
-      const berhasil = tambahKegiatan(daftarKegiatan, input.value);
-      tampilkanStatus(
-        berhasil ? "Kegiatan berhasil ditambahkan." : "Nama kegiatan kosong atau sudah terdaftar.",
-        berhasil
-      );
-      if (berhasil) input.value = "";
-      perbaruiTampilan();
-    });
-  }
+.form-baris label {
+  display: block;
+  margin-bottom: 8px;
+}
 
-  if (input !== null && btnCari !== null) {
-    btnCari.addEventListener("click", function () {
-      if (typeof cariKegiatan !== "function") return;
+.form-baris input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-      const indeks = cariKegiatan(daftarKegiatan, input.value);
-      tampilkanStatus(
-        indeks !== -1 ? `Kegiatan ditemukan pada indeks ${indeks}.` : "Kegiatan tidak ditemukan.",
-        indeks !== -1
-      );
-    });
-  }
+.aksi {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
 
-  if (input !== null && btnHapus !== null) {
-    btnHapus.addEventListener("click", function () {
-      if (typeof hapusKegiatan !== "function") return;
+.aksi button {
+  padding: 10px 18px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-      const berhasil = hapusKegiatan(daftarKegiatan, input.value);
-      tampilkanStatus(
-        berhasil ? "Kegiatan berhasil dihapus." : "Kegiatan tidak ditemukan.",
-        berhasil
-      );
-      if (berhasil) input.value = "";
-      perbaruiTampilan();
-    });
-  }
+/* CSS-04 */
+#daftarKegiatan {
+  padding-left: 25px;
+}
 
-  perbaruiTampilan();
-});
+#daftarKegiatan li {
+  padding: 10px;
+  margin-bottom: 8px;
+  background-color: #f1f5f9;
+  border-radius: 5px;
+}
 
-// Area penambahan Function untuk pertemuan berikutnya akan diberikan
-// oleh guru pada saat paket soal berikutnya dibagikan.
+.ringkasan {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#pesanStatus {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f1f5f9;
+}
+
+#pesanStatus.berhasil {
+  color: green;
+  background-color: #dcfce7;
+}
+
+#pesanStatus.gagal {
+  color: red;
+  background-color: #fee2e2;
+}

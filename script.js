@@ -26,10 +26,10 @@ function tampilkanKegiatan(daftar) {
   // TODO JS-01:
   // Perbaiki batas perulangan for berikut agar dimulai dari indeks pertama
   // dan memproses seluruh elemen berdasarkan panjang Array (length).
-  for (let i = 0; i < 0; i++) {
+  for (let i = 0; i < daftar.length; i++) {
     // TODO JS-02:
     // Ganti string kosong dengan elemen Array 'daftar' pada indeks i.
-    const namaKegiatan = "";
+    const namaKegiatan = daftar[i];
 
     // Disediakan guru: pembentukan dan penampilan elemen HTML.
     const item = document.createElement("li");
@@ -132,14 +132,22 @@ document.addEventListener("DOMContentLoaded", function () {
 function tambahKegiatan(daftar, nama) {
   // TODO JS-03: Simpan nama yang sudah di-trim ke variabel namaBersih.
   // Jika namaBersih kosong, gunakan return false.
+  let namaBersih = nama.trim();
+
+  if (namaBersih === "") {
+    return false;
+  }
 
   // TODO JS-04: Gunakan includes() untuk menolak nama duplikat.
   // Jika kegiatan sudah ada, gunakan return false.
+  if (daftar.includes(namaBersih)) {
+    return false;
+  }
 
   // TODO JS-05: Gunakan push() untuk menambahkan namaBersih.
   // Jika penambahan berhasil, gunakan return true.
-
-  return false; // SEMENTARA: ganti/hapus setelah TODO JS-03 s.d. JS-05 selesai
+  daftar.push(namaBersih);
+  return true;
 }
 
 // TODO JS-06 — Pencarian kegiatan
@@ -147,26 +155,29 @@ function cariKegiatan(daftar, nama) {
   // TODO JS-06: Hilangkan spasi awal/akhir menggunakan trim().
   // Cari posisi kegiatan dengan indexOf(), lalu kembalikan indeksnya.
   // Jika tidak ditemukan, indexOf() akan menghasilkan -1.
-
-  return -1; // SEMENTARA: ganti setelah TODO JS-06 selesai
+  let namaBersih = nama.trim();
+  return daftar.indexOf(namaBersih);
 }
 
 // TODO JS-07 dan JS-08 — Penghapusan kegiatan
 function hapusKegiatan(daftar, nama) {
   // TODO JS-07: Panggil cariKegiatan(daftar, nama).
   // Simpan hasilnya dalam variabel indeks.
+  let indeks = cariKegiatan(daftar, nama);
 
   // TODO JS-08: Jika indeks bernilai -1, gunakan return false.
   // Jika ditemukan, hapus satu elemen menggunakan splice().
   // Kembalikan true jika penghapusan berhasil.
+  if (indeks === -1) {
+    return false;
+  }
 
-  return false; // SEMENTARA: ganti/hapus setelah TODO JS-07 s.d. JS-08 selesai
+  daftar.splice(indeks, 1);
+  return true;
 }
 
 // TODO JS-09 — Menghitung jumlah kegiatan
 function hitungJumlahKegiatan(daftar) {
   // TODO JS-09: Gunakan length dan return untuk menghasilkan jumlah kegiatan.
-
-  return 0; // SEMENTARA: ganti setelah TODO JS-09 selesai
+  return daftar.length;
 }
-
